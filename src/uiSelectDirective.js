@@ -83,6 +83,11 @@ uis.directive('uiSelect',
             $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
         });
 
+        scope.$watch('disableBackspaceReset', function() {
+          var disableBackspaceReset = scope.$eval(attrs.disableBackspaceReset);
+          $select.disableBackspaceReset = disableBackspaceReset !== undefined ? disableBackspaceReset : uiSelectConfig.disableBackspaceReset;
+        });
+
         attrs.$observe('limit', function() {
           //Limit the number of selections allowed
           $select.limit = (angular.isDefined(attrs.limit)) ? parseInt(attrs.limit, 10) : undefined;

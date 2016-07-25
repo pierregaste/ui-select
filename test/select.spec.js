@@ -159,6 +159,7 @@ describe('ui-select tests', function() {
       if (attrs.allowClear !== undefined) { matchAttrsHtml += ' allow-clear="' + attrs.allowClear + '"';}
       if (attrs.inputId !== undefined) { attrsHtml += ' input-id="' + attrs.inputId + '"'; }
       if (attrs.ngClass !== undefined) { attrsHtml += ' ng-class="' + attrs.ngClass + '"'; }
+      if (attrs.disableBackspaceReset !== undefined) { attrsHtml += ' disable-backspace-reset="' + attrs.disableBackspaceReset + '"';}
     }
 
     return compileTemplate(
@@ -798,6 +799,26 @@ describe('ui-select tests', function() {
     scope.selection.selected = '';
     scope.$digest();
     expect(getMatchLabel(el)).toEqual('-- None Selected --');
+  });
+
+  describe('disable backspace reset option', function(){
+    it('should undefined model when pressing BACKSPACE key if disableBackspaceReset=false', function() {
+      var el = createUiSelect();
+      var focusserInput = el.find('.ui-select-focusser');
+
+      clickItem(el, 'Samantha');
+      triggerKeydown(focusserInput, Key.Backspace);
+      expect(scope.selection.selected).toBeUndefined();
+    });
+
+    it('should NOT reset model when pressing BACKSPACE key if disableBackspaceReset=true', function() {
+      var el = createUiSelect({disableBackspaceReset: true});
+      var focusserInput = el.find('.ui-select-focusser');
+
+      clickItem(el, 'Samantha');
+      triggerKeydown(focusserInput, Key.Backspace);
+      expect(scope.selection.selected).toBe(scope.people[5]);
+    });
   });
 
   describe('disabled options', function() {
