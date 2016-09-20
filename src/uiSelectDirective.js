@@ -83,9 +83,8 @@ uis.directive('uiSelect',
             $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
         });
 
-        scope.$watch('disableBackspaceReset', function() {
-          var disableBackspaceReset = scope.$eval(attrs.disableBackspaceReset);
-          $select.disableBackspaceReset = disableBackspaceReset !== undefined ? disableBackspaceReset : uiSelectConfig.disableBackspaceReset;
+        scope.$watch(function () { return scope.$eval(attrs.disableBackspaceReset); }, function(newVal) {
+          $select.disableBackspaceReset = newVal !== undefined ? newVal : uiSelectConfig.disableBackspaceReset;
         });
 
         attrs.$observe('limit', function() {
