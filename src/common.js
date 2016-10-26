@@ -107,6 +107,8 @@ var uis = angular.module('ui.select', [])
     return latestId++;
   },
   appendToBody: false,
+  spinnerEnabled: false,
+  spinnerClass: 'glyphicon-refresh ui-select-spin',
   disableBackspaceReset: false
 })
 
