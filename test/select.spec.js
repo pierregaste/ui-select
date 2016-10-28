@@ -167,7 +167,7 @@ describe('ui-select tests', function() {
       if (attrs.spinnerClass !== undefined) { attrsHtml += ' spinner-class="' + attrs.spinnerClass + '"'; }
       if (attrs.refresh !== undefined) { choicesAttrsHtml += ' refresh="' + attrs.refresh + '"'; }
       if (attrs.refreshDelay !== undefined) { choicesAttrsHtml += ' refresh-delay="' + attrs.refreshDelay + '"'; }
-      if (attrs.disableBackspaceReset !== undefined) { attrsHtml += ' disable-backspace-reset="' + attrs.disableBackspaceReset + '"';}
+      if (attrs.backspaceReset !== undefined) { attrsHtml += ' backspace-reset="' + attrs.backspaceReset + '"';}
     }
 
     return compileTemplate(
@@ -809,8 +809,8 @@ describe('ui-select tests', function() {
     expect(getMatchLabel(el)).toEqual('-- None Selected --');
   });
 
-  describe('disable backspace reset option', function(){
-    it('should undefined model when pressing BACKSPACE key if disableBackspaceReset=false', function() {
+  describe('backspace reset option', function(){
+    it('should undefined model when pressing BACKSPACE key if backspaceReset=true', function() {
       var el = createUiSelect();
       var focusserInput = el.find('.ui-select-focusser');
 
@@ -819,8 +819,8 @@ describe('ui-select tests', function() {
       expect(scope.selection.selected).toBeUndefined();
     });
 
-    it('should NOT reset model when pressing BACKSPACE key if disableBackspaceReset=true', function() {
-      var el = createUiSelect({disableBackspaceReset: true});
+    it('should NOT reset model when pressing BACKSPACE key if backspaceReset=false', function() {
+      var el = createUiSelect({backspaceReset: false});
       var focusserInput = el.find('.ui-select-focusser');
 
       clickItem(el, 'Samantha');

@@ -85,7 +85,7 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
       });
       focusser.bind("keydown", function(e){
 
-        if (e.which === KEY.BACKSPACE && $select.disableBackspaceReset === false) {
+        if (e.which === KEY.BACKSPACE && $select.backspaceReset === true) {
           e.preventDefault();
           e.stopPropagation();
           $select.select(undefined);
