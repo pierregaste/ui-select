@@ -83,8 +83,10 @@ uis.directive('uiSelect',
             $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
         });
 
-        scope.$watch(function () { return scope.$eval(attrs.backspaceReset); }, function(newVal) {
-          $select.backspaceReset = newVal !== undefined ? newVal : uiSelectConfig.backspaceReset;
+        attrs.$observe('backspaceReset', function() {
+          // $eval() is needed otherwise we get a string instead of a boolean
+          var backspaceReset = scope.$eval(attrs.backspaceReset);
+          $select.backspaceReset = backspaceReset !== undefined ? backspaceReset : true;
         });
 
         attrs.$observe('limit', function() {
